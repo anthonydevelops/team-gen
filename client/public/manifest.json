@@ -1,0 +1,8 @@
+{
+  "short_name": "TeamGen",
+  "name": "Team Organizing Platform",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
