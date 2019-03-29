@@ -1,18 +1,13 @@
 // Backend API
-// Main handles the execution of handlers, generation, and connection to db
-
-//go:generate protoc --proto_path=model --proto_path=$GOPATH/src --gogo_out=model ./model/user.proto
+// Main handles the execution of routing & db connection
 
 package main
 
 import (
-	"github.com/gorilla/mux"
+	"github.com/anthonydevelops/team-gen/routes"
 )
 
 func main() {
 	//Initialize router
-	r := mux.NewRouter()
-
-	//Route handlers
-	r.HandleFunc("/v1/api/user", getUser).Methods("GET")
+	r := routes.NewRouter()
 }
