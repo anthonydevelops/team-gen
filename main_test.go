@@ -12,8 +12,8 @@ var a api.Server
 
 func TestMain(m *testing.M) {
 	a = api.Server{}
-	a.Initialize("localhost",
-		5433,
+	a.Initialize("127.0.0.1",
+		80,
 		"postgres",
 		"docker",
 		"test")
