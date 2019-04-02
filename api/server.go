@@ -34,6 +34,7 @@ func (a *Server) InitializeRoutes() error {
 
 // Initialize starts up the API connection
 func (a *Server) Initialize(host string, port int32, user string, pw string, dbname string) {
+	// Login to db
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, pw, dbname)
 	db, err := sql.Open("postgres", psqlInfo)
@@ -42,18 +43,19 @@ func (a *Server) Initialize(host string, port int32, user string, pw string, dbn
 	}
 	defer db.Close()
 
+	// Check connection to db
 	err = db.Ping()
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Println("PostgreSQL successfully connected!")
 
+	// Initialize routes
 	a.Router = mux.NewRouter()
 	a.InitializeRoutes()
 }
 
-// Run initiates backend API
+// Run exposes backend on port 8000
 func (a *Server) Run(addr string) {
 	log.Fatal(http.ListenAndServe(":8000", a.Router))
 }

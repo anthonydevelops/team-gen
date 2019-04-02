@@ -4,16 +4,28 @@ TeamGen is a full-stack web application for finding the perfect team to be a par
 
 # Installation
 
-_TODO_
+```bash
+# Clone the repo
+git clone https://github.com/anthonydevelops/team-gen
+cd /team-gen
+
+# Create config/config.toml file with login credentials based off config/example_config.toml
+touch config/config.toml
+
+# Run Postgres, set environment if needed with -e (POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD)
+# Also, create a local folder to have persistance of docker db image when developing
+docker run --name pg --privileged --rm -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
+
+# Run server to test connection & begin development
+go run main.go
+```
 
 # Documentation
 
-_TODO_
+Detailed documentation can be found in the [docs](https://github.com/anthonydevelops/team-gen/docs) folder.
 
 # Architecture
 
-_TODO_
+TeamGen is built utilizing [ReactJS](https://reactjs.org/) as the component library for the front-end, [Go](https://golang.org/) for our backend server language to connect to [PostgreSQL](https://www.postgresql.org/), and lastly [Docker](https://www.docker.com/) to build in a microservice-oriented way to improve many aspects of the application. 
 
-# Contributing
-
-_TODO_
+_TODO Create architecture layout_

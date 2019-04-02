@@ -11,6 +11,7 @@ import (
 	"github.com/spf13/viper"
 )
 
+// Init initializes parsing & reading of config file
 func init() {
 	viper.SetConfigName("config")
 	viper.SetConfigType("toml")
@@ -21,6 +22,7 @@ func init() {
 	}
 }
 
+// Main calls our server, connects to db, and initializes routes
 func main() {
 	a := api.Server{}
 	a.Initialize(viper.GetString("DB.host"),
