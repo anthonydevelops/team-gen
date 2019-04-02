@@ -9,6 +9,8 @@ services:
   - docker
 
 before_install:
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh  
+  - dep ensure
   - docker pull postgres
   - docker run --name pg --privileged --rm -p 5432:5432 postgres
 
@@ -19,9 +21,6 @@ install: true
 
 notifications:
   email: false
-
-before_script:
-  - dep ensure
 
 script:
   - go test -v ./...  # Run all the tests with the race detector enabled
