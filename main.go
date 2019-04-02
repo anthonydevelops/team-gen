@@ -4,37 +4,30 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"log"
 
-	"github.com/anthonydevelops/team-gen/routes"
+	"github.com/anthonydevelops/team-gen/api"
+	_ "github.com/lib/pq"
+	"github.com/spf13/viper"
 )
 
-var (
-	conf string
-)
-
-func main() {
-	RegisterFlags()
-
-	// Initialize router
-	r, err := routes.NewRouter(conf)
+func init() {
+	viper.SetConfigName("config")
+	viper.SetConfigType("toml")
+	viper.AddConfigPath("./config/")
+	err := viper.ReadInConfig()
 	if err != nil {
-		return log.Fatal(err)
-	}
-
-	// Call endpoints
-	err = routes.HandleEndpoints(r)
-	if err != nil {
-		return log.Fatal(err)
+		fmt.Println(err)
 	}
 }
 
-// RegisterFlags registers startup flags
-func RegisterFlags() {
-	fmt.Println("Registering flags...")
-	flag.StringVar(&conf, "keys-file", "keys.json", "A keys-file holds the db login information")
+func main() {
+	a := api.Server{}
+	a.Initialize(viper.GetString("DB.host"),
+		viper.GetInt32("DB.port"),
+		viper.GetString("DB.user"),
+		viper.GetString("DB.password"),
+		viper.GetString("DB.dbname"))
 
-	flag.Parse()
+	a.Run(viper.GetString("Server.port"))
 }
