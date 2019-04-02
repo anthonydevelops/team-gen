@@ -6,22 +6,21 @@ import (
 	"time"
 
 	"github.com/anthonydevelops/team-gen/api"
-	"github.com/spf13/viper"
 )
 
 var a api.Server
 
 func TestMain(m *testing.M) {
 	a = api.Server{}
-	a.Initialize(viper.GetString("DB.host"),
-		viper.GetInt32("DB.port"),
-		viper.GetString("DB.user"),
-		viper.GetString("DB.password"),
-		viper.GetString("DB.dbname"))
+	a.Initialize("localhost",
+		5433,
+		"postgres",
+		"docker",
+		"test")
 
 	timer := time.NewTimer(3 * time.Second)
 	go func() {
-		a.Run(viper.GetString("Server.port"))
+		a.Run("8000")
 		<-timer.C
 		fmt.Println("Timer expired")
 	}()

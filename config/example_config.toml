@@ -3,7 +3,7 @@ host = "localhost"
 port = "5432"
 user = "<YOUR_USER>"
 password = "<YOUR_PASSWORD>"
-dbname = "<YOUR_DB"
+dbname = "<YOUR_DB>"
 
 [Server]
 port = "8000"

@@ -9,15 +9,16 @@ services:
   - docker
 
 before_install:
-  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh  
-  - dep ensure
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
   - docker pull postgres
-  - docker run --name pg --privileged --rm -p 5432:5432 postgres
+  - docker run --name pg --privileged -e POSTGRES_PASSWORD=docker -e POSTGRES_DB=test --rm -p 5433:5432 postgres
+  - docker ps -a
 
 git:
   depth: 1
 
-install: true
+install:
+  - dep ensure
 
 notifications:
   email: false
