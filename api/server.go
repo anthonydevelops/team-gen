@@ -22,12 +22,12 @@ type Server struct {
 // InitializeRoutes sets & calls handlers
 func (a *Server) InitializeRoutes() error {
 	// Users route handles & endpoints
-	a.Router.HandleFunc("/v1/api/users", listUsers).Methods("GET")
-	a.Router.HandleFunc("/v1/api/users/{id}", retrieveUser).Methods("GET")
-	a.Router.HandleFunc("/v1/api/users/register", createUser).Methods("POST")
-	a.Router.HandleFunc("/v1/api/users/register/{id}", deleteUser).Methods("DELETE")
-	a.Router.HandleFunc("/v1/api/users/login", loginUser).Methods("POST")
-	a.Router.HandleFunc("/v1/api/users/login/{id}", logoutUser).Methods("POST")
+	a.Router.HandleFunc("/v1/api/users", ListUsers).Methods("GET")
+	a.Router.HandleFunc("/v1/api/users/{id}", RetrieveUser).Methods("GET")
+	a.Router.HandleFunc("/v1/api/users/register", CreateUser).Methods("POST")
+	a.Router.HandleFunc("/v1/api/users/register/{id}", DeleteUser).Methods("DELETE")
+	a.Router.HandleFunc("/v1/api/users/login", LoginUser).Methods("POST")
+	a.Router.HandleFunc("/v1/api/users/login/{id}", LogoutUser).Methods("POST")
 
 	return nil
 }
