@@ -7,7 +7,7 @@ import (
 
 // ListUsers retrieves all users
 func ListUsers(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("list all users")
+	fmt.Println("lists all users")
 }
 
 // RetrieveUser retrieves a specific user

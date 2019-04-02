@@ -9,7 +9,8 @@ services:
   - docker
 
 before_install:
-  - docker run --name pg --privileged --rm -e POSTGRES_PASSWORD=docker -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
+  - docker pull postgres
+  - docker run --name pg --privileged --rm -p 5432:5432 postgres
 
 git:
   depth: 1
