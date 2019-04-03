@@ -22,29 +22,31 @@ type Server struct {
 // InitializeRoutes sets & calls handlers
 func (a *Server) InitializeRoutes() error {
 	// Users route handles & endpoints
-	a.Router.HandleFunc("/v1/api/users", ListUsers).Methods("GET")
-	a.Router.HandleFunc("/v1/api/users/{id}", RetrieveUser).Methods("GET")
-	a.Router.HandleFunc("/v1/api/users/register", CreateUser).Methods("POST")
-	a.Router.HandleFunc("/v1/api/users/register/{id}", DeleteUser).Methods("DELETE")
-	a.Router.HandleFunc("/v1/api/users/login", LoginUser).Methods("POST")
-	a.Router.HandleFunc("/v1/api/users/login/{id}", LogoutUser).Methods("POST")
+	a.Router.HandleFunc("/v1/api/users", a.ListUsers).Methods("GET")
+	a.Router.HandleFunc("/v1/api/users/{id}", a.RetrieveUser).Methods("GET")
+	a.Router.HandleFunc("/v1/api/users/register", a.CreateUser).Methods("POST")
+	a.Router.HandleFunc("/v1/api/users/register/{id}", a.DeleteUser).Methods("DELETE")
+	a.Router.HandleFunc("/v1/api/users/login", a.LoginUser).Methods("POST")
+	a.Router.HandleFunc("/v1/api/users/login/{id}", a.LogoutUser).Methods("POST")
 
 	return nil
 }
 
 // Initialize starts up the API connection
 func (a *Server) Initialize(host string, port int32, user string, pw string, dbname string) {
+	var err error
+
 	// Login to db
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, pw, dbname)
-	db, err := sql.Open("postgres", psqlInfo)
+	a.DB, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
 		panic(err)
 	}
-	defer db.Close()
+	defer a.DB.Close()
 
 	// Check connection to db
-	err = db.Ping()
+	err = a.DB.Ping()
 	if err != nil {
 		panic(err)
 	}

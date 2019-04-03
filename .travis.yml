@@ -15,7 +15,7 @@ before_install:
   - curl -L -s https://github.com/golang/dep/releases/download/v${DEP_VERSION}/dep-linux-amd64 -o $GOPATH/bin/dep
   - chmod +x $GOPATH/bin/dep
   - docker pull postgres
-  - docker run -d -p 127.0.0.1:80:5432 --name pg --privileged -e POSTGRES_PASSWORD=docker -e POSTGRES_DB=test --rm postgres
+  - docker run -d -p 127.0.0.1:80:5432 -e POSTGRES_PASSWORD=docker -e POSTGRES_DB=test --name pg --rm postgres
 
 git:
   depth: 1
