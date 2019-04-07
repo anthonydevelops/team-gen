@@ -7,7 +7,6 @@ import (
 	"fmt"
 
 	"github.com/anthonydevelops/team-gen/api"
-	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 )
 

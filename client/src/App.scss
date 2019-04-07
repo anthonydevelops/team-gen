@@ -1,0 +1,21 @@
+.doc-wrapper {
+    height: 100vh;
+    display: grid;
+    grid-template-areas: "head head head"
+        ". . ."
+        "dir view view";
+    grid-template-columns: 25rem 1fr 1fr;
+    grid-template-rows: 50px 25px 1fr;
+}
+
+.hdr-wrapper {
+    grid-area: head;
+}
+
+.dir-wrapper {
+    grid-area: dir;
+}
+
+.view-wrapper {
+    grid-area: view;
+}
